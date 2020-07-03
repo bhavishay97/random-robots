@@ -1,17 +1,25 @@
 import React, { Component } from 'react';
-import Card from './components/Card';
+import CardList from './components/CardList';
+import { getRobots } from './services/robots';
 
 class App extends Component {
+  state = {
+    robots: [],
+  };
+
+  async componentDidMount() {
+    const { data: robots } = await getRobots();
+
+    this.setState({ robots });
+  }
+
   render() {
+    const { robots } = this.state;
+
     return (
       <div className='container'>
         <div className='row justify-content-center'>
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          <CardList robots={robots} />
         </div>
       </div>
     );
