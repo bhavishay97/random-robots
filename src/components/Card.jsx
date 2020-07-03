@@ -20,7 +20,7 @@ const Card = ({ robot }) => {
           className='card-img-top p-2'
           alt='robot'
         />
-        <div className='card-body'>
+        <div className='card-body p-0'>
           <h5 className='card-title'>{robot.name}</h5>
           <p className='card-text'>
             <strong>Works at: </strong>
