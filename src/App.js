@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SearchBox from './components/SearchBox';
 import CardList from './components/CardList';
 import Message from './components/Message';
+import Scroll from './components/Scroll';
 import { getRobots } from './services/robots';
 import './App.css';
 
@@ -35,14 +36,10 @@ class App extends Component {
     return (
       <div className='container'>
         <Message text={'Random robots'} size={'h1'} />
-
-        <div className='row'>
-          <SearchBox searchChange={this.handleSearch} />
-        </div>
-
-        <div className='row justify-content-center'>
+        <SearchBox searchChange={this.handleSearch} />
+        <Scroll>
           <CardList robots={filtered} />
-        </div>
+        </Scroll>
       </div>
     );
   }
