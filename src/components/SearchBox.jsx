@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SearchBox = () => {
+const SearchBox = ({ searchChange }) => {
   const inputStyles = {
     background: '#cdecff',
   };
@@ -14,6 +14,7 @@ const SearchBox = () => {
             style={inputStyles}
             type='search'
             placeholder='search robots...'
+            onChange={searchChange}
             autoFocus
           />
         </div>

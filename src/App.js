@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import SearchBox from './components/SearchBox';
 import CardList from './components/CardList';
+import Message from './components/Message';
 import { getRobots } from './services/robots';
 import './App.css';
 
 class App extends Component {
   state = {
     robots: [],
+    searchQuery: '',
   };
 
   async componentDidMount() {
@@ -15,23 +17,31 @@ class App extends Component {
     this.setState({ robots });
   }
 
+  handleSearch = (e) => {
+    this.setState({ searchQuery: e.target.value });
+  };
+
   render() {
-    const { robots } = this.state;
+    const { robots, searchQuery } = this.state;
+
+    const filtered = robots.filter((robot) => {
+      return robot.name
+        .toLowerCase()
+        .includes(searchQuery.trim().toLowerCase());
+    });
+
+    if (robots.length === 0) return <Message text={'Loading'} size={'h2'} />;
 
     return (
       <div className='container'>
-        <div className='row my-2'>
-          <div className='col text-center'>
-            <h1 className='title text-white text-uppercase font-weight-bold'>
-              Random robots
-            </h1>
-          </div>
-        </div>
+        <Message text={'Random robots'} size={'h1'} />
+
         <div className='row'>
-          <SearchBox />
+          <SearchBox searchChange={this.handleSearch} />
         </div>
+
         <div className='row justify-content-center'>
-          <CardList robots={robots} />
+          <CardList robots={filtered} />
         </div>
       </div>
     );
